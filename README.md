@@ -15,7 +15,7 @@ For NTIRE REDS dataset, our model was trained on the 'blur' and 'sharp' pair.\
 For GOPRO dataset, our model was trained on the lineared blur (not gamma corrected) and sharp pair (as other state-of-the-art methods did).\
 For example, to run the test model pretrained on GOPRO dataset, 
 ```bash
-python main.py --pretrained_dataset 'GOPRO' --test_dataset './Dataset/YOUR_TEST/' --working_directory './data/'
+python main.py --pretrained_dataset 'GOPRO' --test_dataset './Dataset_/Sample2/' --working_directory './data/'
 ```
 or pretrained on NTIRE dataset with additional geometric self-ensemble (takes much more time), 
 ```bash

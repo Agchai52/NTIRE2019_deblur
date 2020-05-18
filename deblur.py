@@ -9,7 +9,7 @@ from utils import *
 
 
 class Deblur():
-	def __init__(self, args):
+	def __init__(self, args, sess):
 		self.model_name = 'Deblur'
 		# self.l1_lambda = args.l1_lambda
 		# self.max_epoch = args.max_epoch
@@ -19,10 +19,8 @@ class Deblur():
 		# self.patch_size = args.patch_size
 		self.kernel_size = args.kernel_size
 		self.channels = args.channels
-		
-		config = tf.ConfigProto()
-		config.gpu_options.allow_growth = True
-		self.sess = tf.Session(config=config)
+
+		self.sess = sess
 
 		print('Model arguments, [{:s}]'.format((str(datetime.now())[:-7])))
 		for arg in vars(args):
@@ -154,7 +152,7 @@ class Deblur():
 		# Convolve with kernel_2d
 		k = self.kernel_size
 		_, h, w, c = tf.unstack(tf.shape(img))
-		result = tf.image.extract_image_patches(img, ksizes=(1,k,k,1), strides=(1,1,1,1),rates=(1,1,1,1), padding="SAME") # Output [B, H, W, k*k*c]
+		result = tf.extract_image_patches(img, ksizes=(1,k,k,1), strides=(1,1,1,1),rates=(1,1,1,1), padding="SAME") # Output [B, H, W, k*k*c]
 		result = tf.reshape(result,[-1, h, w, k*k, c]) # Output [B, H, W, k*k, c]
 		kernel_2d = tf.expand_dims(kernel_2d, axis=-1) # (B, H, W, k*k, 1). Because of the RGB dimension
 		result = tf.multiply(result,kernel_2d) # Elementwise multiplication. Resulting (B, H, W, k*k, 3)
@@ -205,17 +203,20 @@ class Deblur():
 		if not os.path.exists(output_path):
 			os.makedirs(output_path)
 
+		f_test = open("./dataset/AidedDeblur/test_instance_names.txt", "r")
+		imgsName = f_test.readlines()
+		imgsName = [line.rstrip() for line in imgsName]
+		f_test.close()
+		list_test = sorted(imgsName)
 		num_test_vid = len(list_test)
 		
 		for test_vid in list_test:
-			
-			vid_folder = os.path.join(output_path,test_vid.split('/')[-1])
+			vid_folder = "./test_aided"
 			if not os.path.exists(vid_folder):
 				os.makedirs(vid_folder)
-
-			test_frs = glob.glob(os.path.join(test_vid,'*'))
-			test_frs.sort()
-			num_test_fr = len(test_frs)
+			test_vid = test_vid + '_blur_err.png'
+			test_frs = test_vid
+			num_test_fr = 1
 			# test_fr_cnt = 9 # Start from '00000009.png', output every 10 frames (setting for NTIRE 2019)
 			test_fr_cnt = 0 # General setting
 			while test_fr_cnt < num_test_fr:

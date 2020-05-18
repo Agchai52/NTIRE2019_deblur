@@ -17,8 +17,8 @@ class DeblurData():
 		for i in self.list_test:
 			self.num_test += len(glob.glob(os.path.join(i,'*')))
 
-		print('Load all files list')    
-		print("# test imgs : {} ".format(self.num_test))
+		#print('Load all files list')
+		#print("# test imgs : {} ".format(self.num_test))
 
 
 
@@ -38,9 +38,10 @@ def get_input(list_, cnt, pretrained_dataset):
 	elif pretrained_dataset == 'GOPRO':
 		frames = [cnt]
 	# print(frames)
-	imgs_blur = [np.array(Image.open(list_[f])) for f in frames] # Three blurry frames
-	imgs_blur = np.array(imgs_blur)
-	imgs_blur = np.expand_dims(imgs_blur, axis=0) # extend to batch dimension ; [1, 3, Height, Width, Channels]
+
+	imgs_blur = np.array(Image.open(list_))  # Three blurry frames
+	imgs_blur = np.expand_dims(imgs_blur, axis=0)
+	imgs_blur = np.expand_dims(imgs_blur, axis=0)  # extend to batch dimension ; [1, 3, Height, Width, Channels]
 	imgs_blur = imgs_blur.astype('float32')
 
 	h, w= imgs_blur.shape[2:4]
@@ -50,4 +51,4 @@ def get_input(list_, cnt, pretrained_dataset):
 	
 	imgs_blur = (imgs_blur / 255.0)*2.0-1.0 # normalize to [-1,1]
 	
-	return imgs_blur, list_[cnt].split('/')[-1]
+	return imgs_blur, list_.split('/')[-1]
