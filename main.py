@@ -7,11 +7,11 @@ from deblur import Deblur
 def parse_args():
 	parser = argparse.ArgumentParser(description="Deblur")
 	parser.add_argument('--phase', type=str, default='test',help='test or psnr')
-	parser.add_argument('--pretrained_dataset', type=str, default=None,help='Dataset_ on which the checkpoint is trained. NTIRE or GOPRO. NTIRE : 3 consecutive frames input, GOPRO : single frame input.')
+	parser.add_argument('--pretrained_dataset', type=str, default=None,help='Dataset on which the checkpoint is trained. NTIRE or GOPRO. NTIRE : 3 consecutive frames input, GOPRO : single frame input.')
 	parser.add_argument('--kernel_size', type=int, default=5,help='kernel_size')
 	parser.add_argument('--channels', type=int, default=3,help='# img channels')
 	parser.add_argument('--ensemble', action = 'store_true', help='use this if self ensemble is needed')
-	parser.add_argument('--test_dataset', type=str, default='../Dataset_/val/',help='test dataset path')
+	parser.add_argument('--test_dataset', type=str, default='../Dataset/val/',help='test dataset path')
 	parser.add_argument('--working_directory', type=str, default='./data/',help='working_directory path')
 	parser.add_argument('--gpu', dest='gpu_id', type=str, default='0', help='use gpu or cpu')
 	return parser.parse_args()
