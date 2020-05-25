@@ -28,10 +28,10 @@ def main():
 		os.environ['CUDA_VISIBLE_DEVICES'] = ''
 		device = '/cpu:0'
 
-	config = tf.ConfigProto()
+	config = tf.compat.v1.ConfigProto()
 	config.gpu_options.allow_growth = True
 	with tf.device(device):
-		with tf.Session(config=config) as sess:
+		with tf.compat.v1.Session(config=config) as sess:
 			model = Deblur(args, sess)
 			if args.phase == 'psnr':
 				print("PSNR phase")

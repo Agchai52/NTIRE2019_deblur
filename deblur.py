@@ -186,7 +186,7 @@ class Deblur():
 
 
 	def test(self, args, list_test):
-		saver = tf.train.Saver()
+		saver = tf.compat.v1.train.Saver()
 		if args.pretrained_dataset == 'NTIRE':
 			ckpt = tf.train.get_checkpoint_state('checkpoints_NTIRE/')
 		elif args.pretrained_dataset == 'GOPRO':
