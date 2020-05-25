@@ -9,7 +9,7 @@ from utils import *
 
 
 class Deblur():
-	def __init__(self, args, sess):
+	def __init__(self, args):
 		self.model_name = 'Deblur'
 		# self.l1_lambda = args.l1_lambda
 		# self.max_epoch = args.max_epoch

@@ -22,7 +22,7 @@ def main():
 	assert(args.kernel_size%2 == 1), "kernel_size should be an odd number"
 	assert(args.pretrained_dataset in ['NTIRE', 'GOPRO']), "dataset arg should be NTIRE or GOPRO"
 
-	model = Deblur(args, sess)
+	model = Deblur(args)
 	if args.phase == 'psnr':
 		print("PSNR phase")
 		model.test_psnr(args)
