@@ -20,7 +20,9 @@ class Deblur():
 		self.kernel_size = args.kernel_size
 		self.channels = args.channels
 
-		self.sess = sess
+		config = tf.ConfigProto()
+		config.gpu_options.allow_growth = True
+		self.sess = tf.Session(config=config)
 
 		print('Model arguments, [{:s}]'.format((str(datetime.now())[:-7])))
 		for arg in vars(args):

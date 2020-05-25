@@ -21,27 +21,17 @@ def main():
 	args = parse_args()
 	assert(args.kernel_size%2 == 1), "kernel_size should be an odd number"
 	assert(args.pretrained_dataset in ['NTIRE', 'GOPRO']), "dataset arg should be NTIRE or GOPRO"
-	if int(args.gpu_id) >= 0:
-		os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_id
-		device = '/gpu:{}'.format(args.gpu_id)
-	else:
-		os.environ['CUDA_VISIBLE_DEVICES'] = ''
-		device = '/cpu:0'
 
-	config = tf.compat.v1.ConfigProto()
-	config.gpu_options.allow_growth = True
-	with tf.device(device):
-		with tf.compat.v1.Session(config=config) as sess:
-			model = Deblur(args, sess)
-			if args.phase == 'psnr':
-				print("PSNR phase")
-				model.test_psnr(args)
-				exit(1)
+	model = Deblur(args, sess)
+	if args.phase == 'psnr':
+		print("PSNR phase")
+		model.test_psnr(args)
+		exit(1)
 
-			if args.phase == 'test':
-				model.build_model(args)
-				print("Test phase")
-				model.test(args, model.list_test)
+	if args.phase == 'test':
+		model.build_model(args)
+		print("Test phase")
+		model.test(args, model.list_test)
 
 if __name__ == '__main__':
 	main()
