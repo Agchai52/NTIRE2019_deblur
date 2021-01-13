@@ -254,7 +254,7 @@ class Deblur():
 					print("Test image {} saved, run time {}".format(test_vid.split('/')[-1]+'/'+name, toc-tic))
 				test_fr_cnt += 1
 			total_time = time.time() - start_time
-			ave_time = total_time / len(num_test_vid)
+			ave_time = total_time / num_test_vid
 			print("Average Processing time = {}".format(ave_time))
 
 
