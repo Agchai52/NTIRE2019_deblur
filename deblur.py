@@ -6,6 +6,7 @@ import tensorflow as tf
 from tensorflow.contrib.framework import arg_scope,get_model_variables, assign_from_checkpoint_fn
 from tensorflow.contrib import layers
 from utils import *
+import time
 
 
 class Deblur():
@@ -211,7 +212,7 @@ class Deblur():
 		f_test.close()
 		list_test = sorted(imgsName)
 		num_test_vid = len(list_test)
-		
+		start_time = time.time()
 		for test_vid in list_test:
 			vid_folder = "./test_aided"
 			if not os.path.exists(vid_folder):
@@ -252,6 +253,9 @@ class Deblur():
 					test_img.save(os.path.join(vid_folder,name))
 					print("Test image {} saved, run time {}".format(test_vid.split('/')[-1]+'/'+name, toc-tic))
 				test_fr_cnt += 1
+			total_time = time.time() - start_time
+			ave_time = total_time / len(num_test_vid)
+			print("Average Processing time = {}".format(ave_time))
 
 
 	def test_psnr(self, args):
