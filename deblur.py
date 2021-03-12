@@ -207,11 +207,11 @@ class Deblur():
 			os.makedirs(output_path)
 
 		# FOR Aided Dataset
-		# f_test = open("./dataset/AidedDeblur/test_instance_names.txt", "r")  # For DeblurIMU test
-		f_test = open("./real_images/real_image_names.txt", "r")  # For real images
-		imgsName = f_test.readlines()
-		imgsName = [line.rstrip() for line in imgsName]
-		f_test.close()
+		# # f_test = open("./dataset/AidedDeblur/test_instance_names.txt", "r")  # For DeblurIMU test
+		# f_test = open("./real_images/real_image_names.txt", "r")  # For real images
+		# imgsName = f_test.readlines()
+		# imgsName = [line.rstrip() for line in imgsName]
+		# f_test.close()
 
 		# For GOPRO dataset
 		input_path = "./datasets/test_full"
