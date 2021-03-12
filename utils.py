@@ -40,6 +40,7 @@ def get_input(list_, cnt, pretrained_dataset):
 	# print(frames)
 
 	imgs_blur = np.array(Image.open(list_))  # Three blurry frames
+	imgs_blur, _ = np.split(imgs_blur, 2, axis=1)  # Only for GOPRO dataset
 	imgs_blur = np.expand_dims(imgs_blur, axis=0)
 	imgs_blur = np.expand_dims(imgs_blur, axis=0)  # extend to batch dimension ; [1, 3, Height, Width, Channels]
 	imgs_blur = imgs_blur.astype('float32')

@@ -206,21 +206,29 @@ class Deblur():
 		if not os.path.exists(output_path):
 			os.makedirs(output_path)
 
+		# FOR Aided Dataset
 		# f_test = open("./dataset/AidedDeblur/test_instance_names.txt", "r")  # For DeblurIMU test
 		f_test = open("./real_images/real_image_names.txt", "r")  # For real images
 		imgsName = f_test.readlines()
 		imgsName = [line.rstrip() for line in imgsName]
 		f_test.close()
+
+		# For GOPRO dataset
+		input_path = "./datasets/test_full"
+		imgsName = sorted(os.listdir(input_path))
+
 		list_test = sorted(imgsName)
 		num_test_vid = len(list_test)
 		start_time = time.time()
 		for test_vid in list_test:
+			if ".png" not in test_vid:
+				continue
 			# vid_folder = "./test_aided"  # output dir for DeblurIMU
-			vid_folder = "./test_real_aided"
+			vid_folder = "./test_GOPRO"
 			if not os.path.exists(vid_folder):
 				os.makedirs(vid_folder)
 			# test_vid = test_vid + '_blur_err.png'
-			test_vid = test_vid + '.png'
+			# test_vid = test_vid + '.png'
 			test_frs = test_vid
 			num_test_fr = 1
 			# test_fr_cnt = 9 # Start from '00000009.png', output every 10 frames (setting for NTIRE 2019)
