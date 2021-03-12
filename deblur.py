@@ -214,7 +214,7 @@ class Deblur():
 		# f_test.close()
 
 		# For GOPRO dataset
-		input_path = "./datasets/test_full"
+		input_path = "./datasets/test_full/"
 		imgsName = sorted(os.listdir(input_path))
 
 		list_test = sorted(imgsName)
@@ -229,6 +229,7 @@ class Deblur():
 				os.makedirs(vid_folder)
 			# test_vid = test_vid + '_blur_err.png'
 			# test_vid = test_vid + '.png'
+			test_vid = input_path + test_vid
 			test_frs = test_vid
 			num_test_fr = 1
 			# test_fr_cnt = 9 # Start from '00000009.png', output every 10 frames (setting for NTIRE 2019)
