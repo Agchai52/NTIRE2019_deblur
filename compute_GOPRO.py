@@ -12,12 +12,12 @@ from skimage.metrics import peak_signal_noise_ratio as psnr
 
 
 # For GOPRO dataset
-deblu_root = './test_GOPRO'
-sharp_root = './datasets/test_full'
+# deblu_root = './test_GOPRO'
+# sharp_root = './datasets/test_full'
 
 # For GOPRO_NB dataset
-# deblu_root = './res_GOPRO_NB'
-# sharp_root = './datasets/test_sharpm'
+deblu_root = './test_GOPRONB'
+sharp_root = './datasets/test_sharpm'
 
 deblu_list = os.listdir(deblu_root)
 sharp_list = os.listdir(sharp_root)
@@ -49,7 +49,7 @@ for n, item in enumerate(sharp_list):
         img_sharp = cv2.imread(path_sharp, cv2.IMREAD_COLOR).astype(np.float)
 
         # For GOPRO dataset
-        _, img_sharp = np.split(img_sharp, 2, axis=1)
+        # _, img_sharp = np.split(img_sharp, 2, axis=1)
 
         # cv2.imwrite('img_blur.png', img_blur)
         #cv2.imwrite('img_deblu.png', img_deblu)
