@@ -214,7 +214,7 @@ class Deblur():
 		# f_test.close()
 
 		# For GOPRO dataset
-		input_path = "./datasets/test_full/"
+		input_path = "./datasets/test_poisson/"
 		imgsName = sorted(os.listdir(input_path))
 
 		list_test = sorted(imgsName)
@@ -224,7 +224,7 @@ class Deblur():
 			if ".png" not in test_vid:
 				continue
 			# vid_folder = "./test_aided"  # output dir for DeblurIMU
-			vid_folder = "./test_GOPRO"
+			vid_folder = "./test_GOPRONB"
 			if not os.path.exists(vid_folder):
 				os.makedirs(vid_folder)
 			# test_vid = test_vid + '_blur_err.png'
